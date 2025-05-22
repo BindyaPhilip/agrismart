@@ -92,7 +92,7 @@ const getActiveTab = (): void => {
   if (path.includes('settings')) {
     activeTab.value = 'settings'
   }
-  if (path.includes('profile')) {
+  if (path.includes('system-guide')) {
     activeTab.value = 'profile'
   }
   if (path.includes('model-training')) {
@@ -273,7 +273,7 @@ onMounted(() => {
             <span class="text-2xl block float-left">
               <FolderIcon class="w-5 h-5"/>
             </span>
-            <span :class="`text-base font-medium flex-1 duration-200 ${!isOpen && 'hidden'}`">Slots</span>
+            <span :class="`text-base font-medium flex-1 duration-200 ${!isOpen && 'hidden'}`">Available Slots</span>
           </RouterLink>
            <RouterLink v-if="user?.role ==='expert'"  to="/account/addresses/bookings"
             :class="`text-green-100 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:font-bold hover:text-white rounded-md mt-2 ${activeTab === 'bookings' && 'font-bold text-white bg-green-600'}`">
@@ -325,12 +325,12 @@ onMounted(() => {
         </RouterLink>
       </div> -->
 
-      <RouterLink to="/account/profile"
+      <RouterLink to="/account/system-guide"
         :class="`text-green-100 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:font-bold hover:text-white rounded-md mt-9 ${activeTab === 'profile' && 'font-bold text-white bg-green-600'}`">
         <span class="text-2xl block float-left">
           <UserIcon class="w-5 h-5"/>
         </span>
-        <span :class="`text-base font-medium flex-1 duration-200 ${!isOpen && 'hidden'}`">Profile</span>
+        <span :class="`text-base font-medium flex-1 duration-200 ${!isOpen && 'hidden'}`">User Guide</span>
       </RouterLink>
       <div @click="logout"
            class="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:font-bold hover:text-white rounded-md mt-2">

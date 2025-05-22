@@ -21,6 +21,7 @@ import {useAuthStore} from "@/stores/auth";
 
 import Settings from "@/pages/settings/Settings.vue";
 import Profile from "@/pages/profile/Profile.vue";
+import SystemGuide from "@/pages/profile/SystemGuide.vue";
 import ConfirmPassword from "@/pages/auth/ConfirmPassword.vue";
 
 import ImageUpload from "@/pages/image-analysis-mgt/ImageUpload.vue"
@@ -167,6 +168,11 @@ const router = createRouter({
           name: 'profile',
           component: Profile
         },
+         {
+          path: "system-guide",
+          name: 'System Guide',
+          component: SystemGuide
+        }
       ]
     }
   ]

@@ -30,6 +30,26 @@ export class ImageService {
         return response?.data
 
     }
+    public async LeafDetection(file:File): Promise<any> {
+        const formData = new FormData();
+        formData.append('image',file) 
+        try {
+            const response = await this.imageClient.post('/leaf-detection/', formData);
+            return response?.data;
+          } catch (error:any) {
+            if (error.response && error.response.status === 400) {
+              // Return the 400 response data instead of throwing
+              return error.response.data;
+            }
+            throw error; // Rethrow other errors
+          }
+
+
+
+
+    
+
+    }
 
 
 }
