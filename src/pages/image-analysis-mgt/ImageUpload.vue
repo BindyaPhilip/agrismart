@@ -171,33 +171,65 @@ onUnmounted(() => {
             </p>
 
             <!-- Display analysis results -->
-            <div v-if="imageAnalysisResults" class="w-full p-6 bg-white rounded-lg shadow-md border border-gray-200">
-              <h3 class="text-xl font-bold text-gray-700 mb-4 border-b border-gray-300 pb-2">Results</h3>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between">
-                  <p class="text-gray-600 font-medium">Disease Detected:</p>
-                  <p class="text-gray-800 font-semibold">{{ removeUnderScore(imageAnalysisResults.rust_class) || "N/A" }}</p>
-                </div>
-                <div class="flex items-center justify-between">
-                  <p class="text-gray-600 font-medium">Confidence Score:</p>
-                  <p class="text-gray-800 font-semibold">{{ confidencePercentage }}</p>
-                </div>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4">
-                  <button
-                    @click="openCommentsDialog()"
-                    class="w-full sm:w-auto text-center bg-green-100 text-green-700 font-semibold py-2 px-4 rounded-md hover:bg-green-200 transition ease-in-out duration-300"
-                  >
-                    View Educational Resources
-                  </button>
-                  <RouterLink
-                    to="/account/addresses/slots"
-                    class="w-full sm:w-auto text-center bg-green-100 text-green-700 font-semibold py-2 px-4 rounded-md hover:bg-green-200 transition ease-in-out duration-300"
-                  >
-                    Book a Slot
-                  </RouterLink>
+            <div v-if="imageAnalysisResults" class="w-full p-6 bg-white rounded-xl shadow-lg scrollable border border-gray-200 transition-all duration-300 hover:shadow-xl">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-5 border-b border-gray-300 pb-3">Analysis Results</h3>
+                <div class="space-y-4">
+                  <!-- Disease and Confidence -->
+                  <!-- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-center justify-between py-2">
+                      <p class="text-gray-600 font-medium">Disease Detected:</p>
+                      <p class="text-gray-800 font-semibold">{{ removeUnderScore(imageAnalysisResults.rust_class) || "N/A" }}</p>
+                    </div>
+                    <div class="flex items-center justify-between py-2">
+                      <p class="text-gray-600 font-medium">Confidence Score:</p>
+                      <p class="text-gray-800 font-semibold">{{ confidencePercentage }}</p>
+                    </div>
+                  </div> -->
+
+                  <!-- Feedback Section -->
+                  <div class="mt-4">
+                    <!-- <h4 class="text-lg font-semibold text-gray-700 mb-3">Feedback</h4> -->
+                    <div class="space-y-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                      <div>
+                        <p class="text-gray-600 font-medium">Message:</p>
+                        <p class="text-gray-800">{{ imageAnalysisResults.feedback.message || "No message available." }}</p>
+                      </div>
+                      <div>
+                        <p class="text-gray-600 font-medium">Explanation:</p>
+                        <p class="text-gray-800">{{ imageAnalysisResults.feedback.explanation || "No explanation provided." }}</p>
+                      </div>
+                      <div>
+                        <p class="text-gray-600 font-medium">Advice:</p>
+                        <ul class="list-disc list-inside text-gray-800 space-y-1">
+                          <li v-for="(item, index) in imageAnalysisResults.feedback.advice" :key="index">{{ item }}</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p class="text-gray-600 font-medium">Confidence:</p>
+                        <p class="text-gray-800">{{ confidencePercentage|| "No confidence message available." }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Action Buttons -->
+                  <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+                    <button
+                      @click="openCommentsDialog()"
+                      class="w-full sm:w-auto text-center bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                      aria-label="View Educational Resources"
+                    >
+                      View Educational Resources
+                    </button>
+                    <RouterLink
+                      to="/account/addresses/slots"
+                      class="w-full sm:w-auto text-center bg-green-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-green-700 transition ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                      aria-label="Book a Consultation Slot"
+                    >
+                      Book a Slot
+                    </RouterLink>
+                  </div>
                 </div>
               </div>
-            </div>
 
             <!-- Error message -->
             <p v-if="errorMessage" class="text-red-500 text-center">
@@ -317,5 +349,16 @@ onUnmounted(() => {
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #059669; /* green-600 */
+}
+
+.scrollable-y {
+  max-height: 70vh;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollable-y::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 </style>
