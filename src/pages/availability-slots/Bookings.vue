@@ -43,7 +43,8 @@ watch(approveBookingResponse, (val)=>{
     if(val.status === 201 || val.status === 200){
     showNotification('Success',"Booking approved","success");
     updateDialogOpen.value = false
-     isApproveLoading.value = false
+    isApproveLoading.value = false
+    store.getFarmerBookingSlots()
     
     }
 })

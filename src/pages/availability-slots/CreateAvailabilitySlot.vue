@@ -29,6 +29,15 @@ watch(response, (val)=>{
     }
 })
 
+watch(response, (val)=>{
+    if(val.status === 400){
+        isLoading.value = false
+            showNotification("Error", "Slot overlaps with an existing active slots", "error");
+                store.getAvailabilitySlots(page.value, pageSize.value)
+            
+    }
+})
+
 watch(deactivateResponse, (val)=>{
     if(val.status === 200 || val.status ===201){
         isDeactivating.value = false
